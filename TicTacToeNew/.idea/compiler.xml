@@ -22,11 +22,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="tiktaktoe" />
+        <module name="TicTacToeNew" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="tiktaktoe" target="1.5" />
+      <module name="TicTacToeNew" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

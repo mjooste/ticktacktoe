@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>za.co.openwindow</groupId>
-    <artifactId>ticktaktoe</artifactId>
+    <artifactId>ticTacToe</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    
+
 </project>

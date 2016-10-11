@@ -14,6 +14,10 @@ import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import static game.Cell.E;
+import static game.Cell.O;
+import static game.Cell.X;
+
 
 /**
  * Created by therina on 2016/10/01.
@@ -40,6 +44,7 @@ public class GameFrame extends JFrame {
         twoPlayerItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 gameState = new GameState(GameStyle.TWO_PLAYER);
+                refreshBoard();
 
             }
         });
@@ -69,9 +74,10 @@ public class GameFrame extends JFrame {
                 //gui row and column panel
                 for (int b = 0; b < 9; b++) {
 //                    JButton button = new JButton(Integer.toString(i + 1));
-                    JButton button = new JButton("O");
+                    JButton button = new JButton();
                     button.setPreferredSize(new Dimension(40, 40));
                     cellPanel.add(button);
+                    cellPanel.getButtons().add(button);
                     boardCellPanels.put(new Point(r,c,b), cellPanel);
                     //key: new instance of point, value:gui cell Panel
                     boardPanel.add(cellPanel);
@@ -96,6 +102,26 @@ public class GameFrame extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
 
+    }
+
+    public void refreshBoard(){
+        for (int r = BoardState.MIN; r <= BoardState.MAX; r++) {
+            for (int c = BoardState.MIN; c <= BoardState.MAX; c++) {
+                for (int b = 0; b < 9; b++){
+                switch (gameState.getTheBoard().getCell(r,c,b)) {
+                    case X:
+                        boardCellPanels.get(new Point(r, c, b)).getButtons().get(b).setText("X");
+                        break;
+                    case O:
+                        boardCellPanels.get(new Point(r, c, b)).getButtons().get(b).setText("O");
+                        break;
+                    case E:
+                        boardCellPanels.get(new Point(r, c, b)).getButtons().get(b).setText("");
+                        break;
+                }
+                }
+            }
+        }
     }
 //    //board buttons
 //    private JButton board[][];

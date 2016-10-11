@@ -30,7 +30,28 @@ public class Point {
         this.button = button;
     }
 
-//
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Point point = (Point) o;
+
+        if (row != point.row) return false;
+        if (column != point.column) return false;
+        return button == point.button;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = row;
+        result = 31 * result + column;
+        result = 31 * result + button;
+        return result;
+    }
+
+    //
 //    public int getOuterRow() {
 //        return outerRow;
 //    }

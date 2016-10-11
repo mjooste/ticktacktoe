@@ -32,7 +32,7 @@ public class BoardState {
         cells = new HashMap<Point, Cell>();
         for (int r = MIN; r <= MAX; r++ ){
             for (int c = MIN; c <= MAX; c++) {
-              for(int b = MIN; b <= MAX; b++) {
+              for(int b = 0; b <9; b++) {
                   setCell(new Point(r, c, b), Cell.E);
               }
 
@@ -41,10 +41,24 @@ public class BoardState {
     }
 
 
+    public Cell getCell(Point point) {
+        return cells.get(point);
+    }
+
     //populate map
     public void setCell(Point point, Cell cell) {
         cells.put(point, cell);
     }
+
+    public Cell getCell(int row, int column, int button) {
+        return getCell(new Point(row,column,button));
+    }
+
+
+    public void setCell(int row, int column, int button, Cell cell) {
+        setCell(new Point(row, column, button), cell);
+    }
+
 
 
 

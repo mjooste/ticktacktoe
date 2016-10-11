@@ -15,6 +15,9 @@ public class GameState {
 
     public GameState (GameStyle gameStyle){
         this.gameStyle = gameStyle;
+        theBoard = new BoardState();
+        theBoard.setCell(new Point(BoardState.MIN, BoardState.MIN, 2), Cell.X);
+        theBoard.setCell(new Point(BoardState.MAX, BoardState.MAX, 2), Cell.O);
 
         playerO = new Player(Cell.O);
         playerX = new Player(Cell.X);
@@ -30,6 +33,10 @@ public class GameState {
         } else {
             activePlayer = playerX;
         }
+    }
+
+    public BoardState getTheBoard() {
+        return theBoard;
     }
 
     public boolean hasActiveSelection() {

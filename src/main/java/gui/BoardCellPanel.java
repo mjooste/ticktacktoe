@@ -11,13 +11,16 @@ public class BoardCellPanel extends JPanel {
 
     private int row;
     private int column;
-    private List<JButton> buttons;
+
+
 
     public BoardCellPanel(int row, int column) {
         super();
         this.row = row;
         this.column = column;
-        this.buttons = new ArrayList<JButton>(9);
+
+
+
     }
 
     public int getRow() {
@@ -28,7 +31,9 @@ public class BoardCellPanel extends JPanel {
         return column;
     }
 
-    public List<JButton> getButtons() {
-        return buttons;
-    }
+
+
+
+
+
 }

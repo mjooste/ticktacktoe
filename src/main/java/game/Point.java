@@ -6,28 +6,20 @@ import java.awt.*;
  * Created by therina on 2016/10/01.
  */
 public class Point {
-//    private int outerRow;
-//    private int innerRow;
-//    private int outerColumn;
-//    private int innerColumn;
 
     private int row;
     private int column;
-    private int button;
+    private int innerRow;
+    private int innerColumn;
 
 //    //declare new cell/point on board
-//    public Point(int outerRow, int outerColumn, int innerRow, int innerColumn ){
-//        this.outerRow = outerRow;
-//        this.outerColumn = outerColumn;
-//        this.innerRow = innerRow;
-//        this.innerColumn = innerColumn;
-//    }
-
-    //declare new cell/point on board
-    public Point(int row, int column, int button ){
+    public Point(int row, int column, int innerRow, int innerColumn ){
+        //cells
         this.row = row;
         this.column = column;
-        this.button = button;
+        //buttons
+        this.innerRow = innerRow;
+        this.innerColumn = innerColumn;
     }
 
     @Override
@@ -39,7 +31,8 @@ public class Point {
 
         if (row != point.row) return false;
         if (column != point.column) return false;
-        return button == point.button;
+        if (innerRow != point.innerRow) return false;
+        return innerColumn == point.innerColumn;
 
     }
 
@@ -47,40 +40,27 @@ public class Point {
     public int hashCode() {
         int result = row;
         result = 31 * result + column;
-        result = 31 * result + button;
+        result = 31 * result + innerRow;
+        result = 31 * result + innerColumn;
         return result;
     }
 
-    //
-//    public int getOuterRow() {
-//        return outerRow;
-//    }
-//
-//    public int getInnerRow() {
-//        return innerRow;
-//    }
-//
-//    public int getOuterColumn() {
-//        return outerColumn;
-//    }
-//
-//    public int getInnerColumn() {
-//        return innerColumn;
-//    }
-//
-//    public void setOuterRow(int outerRow) {
-//        this.outerRow = outerRow;
-//    }
-//
-//    public void setInnerRow(int innerRow) {
-//        this.innerRow = innerRow;
-//    }
-//
-//    public void setOuterColumn(int outerColumn) {
-//        this.outerColumn = outerColumn;
-//    }
-//
-//    public void setInnerColumn(int innerColumn) {
-//        this.innerColumn = innerColumn;
-//    }
+
+
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public int getInnerRow() {
+        return innerRow;
+    }
+
+    public int getInnerColumn() {
+        return innerColumn;
+    }
 }

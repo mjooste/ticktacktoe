@@ -13,32 +13,23 @@ public class BoardState {
 
     private Map<Point, Cell> cells;
 
-    //new board state loop through row and col and add empty cells
-//    public BoardState() {
-//        cells = new HashMap<Point, Cell>();
-//       for (int or = MIN; or <= MAX; or++ ){
-//           for (int oc = MIN; oc <= MAX; oc++) {
-//               for (int ir = MIN; ir <= MAX; ir++ ) {
-//                   for (int ic = MIN; ic <= MAX; oc++) {
-//                       setCell(new Point(or, oc,ir,ic), Cell.E);
-//                   }
-//               }
-//           }
-//
-//        }
-//    }
-
+    //new board state loop through row and col and inner row and column, add empty cells
     public BoardState() {
         cells = new HashMap<Point, Cell>();
-        for (int r = MIN; r <= MAX; r++ ){
-            for (int c = MIN; c <= MAX; c++) {
-              for(int b = 0; b <9; b++) {
-                  setCell(new Point(r, c, b), Cell.E);
-              }
+        //cells
+       for (int r = MIN; r <= MAX; r++ ){
+           for (int c = MIN; c <= MAX; c++) {
+               //buttons
+               for (int ir = MIN; ir <= MAX; ir++ ) {
+                   for (int ic = MIN; ic <= MAX; ic++) {
+                       setCell(new Point(r, c,ir,ic), Cell.E);
+                   }
+               }
+           }
 
-            }
         }
     }
+
 
 
     public Cell getCell(Point point) {
@@ -50,14 +41,14 @@ public class BoardState {
         cells.put(point, cell);
     }
 
-    public Cell getCell(int row, int column, int button) {
-        return getCell(new Point(row,column,button));
+    public Cell getCell(int row, int column, int innerRow, int innerColumn){
+        return getCell(new Point(row,column,innerRow,innerColumn));
     }
 
+    public void setCell(int row, int column, int innerRow, int innerColumn, Cell cell) {
+       setCell(new Point(row, column, innerRow, innerColumn), cell);
+   }
 
-    public void setCell(int row, int column, int button, Cell cell) {
-        setCell(new Point(row, column, button), cell);
-    }
 
 
 

@@ -14,10 +14,6 @@ import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.Map;
 
-import static game.Cell.E;
-import static game.Cell.O;
-import static game.Cell.X;
-
 
 /**
  * Created by therina on 2016/10/01.
@@ -26,11 +22,14 @@ public class GameFrame extends JFrame {
     private GameState gameState;
     private JLabel messageLabel;
     private Map<Point, BoardCellPanel> boardCellPanels;
+    private Map<Point, BoardCellButton> boardCellButtons;
 
 
-    public GameFrame(){
+    public GameFrame(GameState gameState){
         super();
         boardCellPanels = new HashMap<Point,BoardCellPanel>();
+        boardCellButtons = new HashMap<Point,BoardCellButton>();
+        this.gameState = gameState;
         initGui();
 
     }
@@ -71,25 +70,26 @@ public class GameFrame extends JFrame {
         for (int r = BoardState.MIN; r <= BoardState.MAX; r++) {
             for (int c = BoardState.MIN; c <= BoardState.MAX; c++) {
                 BoardCellPanel cellPanel = new BoardCellPanel(r,c);
-                //gui row and column panel
-                for (int b = 0; b < 9; b++) {
-//                    JButton button = new JButton(Integer.toString(i + 1));
-                    JButton button = new JButton();
-                    button.setPreferredSize(new Dimension(40, 40));
-                    cellPanel.add(button);
-                    cellPanel.getButtons().add(button);
-                    boardCellPanels.put(new Point(r,c,b), cellPanel);
-                    //key: new instance of point, value:gui cell Panel
-                    boardPanel.add(cellPanel);
-                }
-
-
                 cellPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
+                for (int ir = BoardState.MIN; ir <= BoardState.MAX; ir++) {
+                    for (int ic = BoardState.MIN; ic <= BoardState.MAX; ic++) {
+                        BoardCellButton cellButton = new BoardCellButton(cellPanel, ir,ic);
+                        cellButton.setPreferredSize(new Dimension(40, 40));
 
+                        cellButton.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent actionEvent) {
+                                BoardCellButton clickedButton = (BoardCellButton) actionEvent.getSource();
+                                gameState.doMove(clickedButton.getPanel().getRow(), clickedButton.getPanel().getColumn(), clickedButton.getInnerRow(),clickedButton.getInnerColumn());
+                            }
+                        });
+                        boardCellButtons.put(new Point(r,c,ir,ic),cellButton);
+                        cellPanel.add(cellButton);
 
+                        }
+                    }
 
-
+                boardPanel.add(cellPanel);
             }
         }
 
@@ -107,19 +107,22 @@ public class GameFrame extends JFrame {
     public void refreshBoard(){
         for (int r = BoardState.MIN; r <= BoardState.MAX; r++) {
             for (int c = BoardState.MIN; c <= BoardState.MAX; c++) {
-                for (int b = 0; b < 9; b++){
-                switch (gameState.getTheBoard().getCell(r,c,b)) {
-                    case X:
-                        boardCellPanels.get(new Point(r, c, b)).getButtons().get(b).setText("X");
-                        break;
-                    case O:
-                        boardCellPanels.get(new Point(r, c, b)).getButtons().get(b).setText("O");
-                        break;
-                    case E:
-                        boardCellPanels.get(new Point(r, c, b)).getButtons().get(b).setText("");
-                        break;
+                for (int ir = BoardState.MIN; ir <= BoardState.MAX; ir++){
+                    for (int ic = BoardState.MIN; ic <= BoardState.MAX; ic++) {
+                        switch (gameState.getTheBoard().getCell(r,c,ir,ic)) {
+                            case X:
+                                boardCellButtons.get(new Point(r, c,ir,ic)).setText("X");
+                                break;
+                            case O:
+                                boardCellButtons.get(new Point(r, c,ir,ic)).setText("O");
+                                break;
+                            case E:
+                                boardCellButtons.get(new Point(r, c,ir,ic)).setText("");
+                                break;
+                        }
+                    }
                 }
-                }
+//
             }
         }
     }

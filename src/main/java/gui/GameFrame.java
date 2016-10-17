@@ -81,6 +81,7 @@ public class GameFrame extends JFrame {
                             public void actionPerformed(ActionEvent actionEvent) {
                                 BoardCellButton clickedButton = (BoardCellButton) actionEvent.getSource();
                                 gameState.doMove(clickedButton.getPanel().getRow(), clickedButton.getPanel().getColumn(), clickedButton.getInnerRow(),clickedButton.getInnerColumn());
+                                refreshBoard();
                             }
                         });
                         boardCellButtons.put(new Point(r,c,ir,ic),cellButton);
@@ -125,6 +126,14 @@ public class GameFrame extends JFrame {
 //
             }
         }
+
+
+        this.repaint();
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
+        refreshBoard();
     }
 //    //board buttons
 //    private JButton board[][];

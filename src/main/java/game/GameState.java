@@ -16,8 +16,8 @@ public class GameState {
     public GameState (GameStyle gameStyle){
         this.gameStyle = gameStyle;
         theBoard = new BoardState();
-//        theBoard.setCell(new Point(BoardState.MIN, BoardState.MIN, 2), Cell.X);
-//        theBoard.setCell(new Point(BoardState.MAX, BoardState.MAX, 2), Cell.O);
+        //theBoard.setCell(new Point(BoardState.MIN, BoardState.MIN, BoardState.MIN, BoardState.MIN), Cell.X);
+        //theBoard.setCell(new Point(BoardState.MAX, BoardState.MAX, BoardState.MAX,BoardState.MAX), Cell.O);
 
         playerO = new Player(Cell.O);
         playerX = new Player(Cell.X);
@@ -37,16 +37,15 @@ public class GameState {
 
     public void doMove(Point point){
         if(isLegalMove(point)){
-            theBoard.setCell(point,activePlayer.getCharacter());
-
+            theBoard.setCell(point, activePlayer.getCharacter());
         }
-        selectedPoint = null;
+
         switchPlayers();
 
     }
 
     public boolean isLegalMove(Point point){
-        return hasActiveSelection() && theBoard.getCell(point).equals(Cell.E);
+        return theBoard.getCell(point).equals(Cell.E);
     }
 
     public void doMove(int row, int column, int innerRow, int innerColumn ){
@@ -57,7 +56,4 @@ public class GameState {
         return theBoard;
     }
 
-    public boolean hasActiveSelection() {
-        return selectedPoint != null;
-    }
 }

@@ -128,6 +128,24 @@ public class GameFrame extends JFrame {
         }
 
 
+        if (gameState.gameIsOver()) {
+            if (gameState.isAWinForX()) {
+                messageLabel.setText("Game Over! X Won");
+            }else if (gameState.isAWinForO()) {
+                messageLabel.setText("Game Over! O Won");
+
+            } else {
+                messageLabel.setForeground(Color.BLACK);
+                messageLabel.setText("Game Over! This game is a draw.");
+            }
+        } else {
+            if (gameState.getActivePlayer().getCharacter().equals(Cell.X)) {
+
+                messageLabel.setText("X's turn.");
+            } else {
+                messageLabel.setText("O's turn.");
+            }
+        }
         this.repaint();
     }
 

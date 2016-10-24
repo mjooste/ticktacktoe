@@ -187,4 +187,7 @@ public class GameState {
         return theBoard;
     }
 
+    public BoardCellPanel getActivePanel() {
+        return activePanel;
+    }
 }

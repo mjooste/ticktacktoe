@@ -15,6 +15,7 @@ import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.Map;
 
+
 import java.awt.BorderLayout;
 
 import static java.awt.SystemColor.text;
@@ -25,6 +26,7 @@ public class GameFrame extends JFrame {
     private JLabel messageLabel;
     private Map<Point, BoardCellPanel> boardCellPanels;
     private Map<Point, BoardCellButton> boardCellButtons;
+
 
 
     public GameFrame(GameState gameState){
@@ -59,9 +61,12 @@ public class GameFrame extends JFrame {
         });
         JMenuItem aiItem = new JMenuItem("New AI Game");
 
+        JMenuItem instructions = new JMenuItem("Instructions");
+
         menu.add(twoPlayerItem);
         menu.add(networkedItem);
         menu.add(aiItem);
+        menu.add(instructions);
 
         menuBar.add(menu);
         this.setJMenuBar(menuBar);
@@ -73,7 +78,6 @@ public class GameFrame extends JFrame {
             for (int c = BoardState.MIN; c <= BoardState.MAX; c++) {
                 BoardCellPanel cellPanel = new BoardCellPanel(r,c);
                 cellPanel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
-                cellPanel.setBackground(new Color(130, 184, 189));
                 cellPanel.setForeground(Color.WHITE);
 
 
@@ -83,6 +87,7 @@ public class GameFrame extends JFrame {
                         BoardCellButton cellButton = new BoardCellButton(cellPanel, ir,ic);
                         cellButton.setPreferredSize(new Dimension(40, 40));
                         cellButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+                        cellPanel.setBackground(new Color(130, 184, 189));
 
 
                         // style cell buttons
@@ -101,9 +106,10 @@ public class GameFrame extends JFrame {
                         cellPanel.add(cellButton);
                         boardCellButtons.getClass();
 
+
                         }
                     }
-
+                boardCellPanels.put(new Point(r,c), cellPanel);
                 boardPanel.add(cellPanel);
             }
         }
@@ -139,6 +145,11 @@ public class GameFrame extends JFrame {
                 }
             }
         }
+        Point activePanelPoint = new Point(gameState.getActivePanel().getRow(), gameState.getActivePanel().getColumn());
+        for (Point point: boardCellPanels.keySet()) {
+            boardCellPanels.get(point).setBackground(new Color(130, 184, 189));
+        }
+        boardCellPanels.get(activePanelPoint).setBackground(new Color(149, 189, 174));
 
         //styles message label
         messageLabel.setForeground(new Color(74, 74, 74));

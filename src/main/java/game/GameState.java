@@ -11,11 +11,14 @@ public class GameState {
     private GameStyle gameStyle;
 
     private BoardState theBoard;
-    private Player playerX;
-    private Player playerO;
+    protected Player playerX;
+    protected Player playerO;
     private Player activePlayer;
     private BoardCellPanel activePanel;
-    private Point selectedPoint;
+
+    //track local player- sees the board
+
+    //track remote player- uses some other input method
 
     public GameState (GameStyle gameStyle){
         this.gameStyle = gameStyle;
@@ -28,7 +31,7 @@ public class GameState {
 
         activePlayer = playerX;
 
-        selectedPoint = null;
+
     }
 
 
@@ -44,14 +47,17 @@ public class GameState {
     public void doMove(Point point){
         if(isLegalMove(point)){
             theBoard.setCell(point, activePlayer.getCharacter());
+
             // Set new active panel
+
             activePanel = new BoardCellPanel(point.getInnerRow(), point.getInnerColumn());
             switchPlayers();
         }
     }
 
 
-    public boolean isLegalMove(Point point){
+
+    public boolean isLegalMove(Point point) {
         boolean isEmpty = theBoard.getCell(point).equals(Cell.E);
         boolean onActivePanel = activePanel == null || theBoard.getCell(point).equals(Cell.E) && point.getRow() == activePanel.getRow() && point.getColumn() == activePanel.getColumn();
         return isEmpty && onActivePanel;

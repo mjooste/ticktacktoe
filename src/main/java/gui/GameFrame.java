@@ -19,7 +19,7 @@ import java.util.Map;
 import java.awt.BorderLayout;
 
 import static java.awt.SystemColor.text;
-import static javafx.application.ConditionalFeature.SWT;
+
 
 public class GameFrame extends JFrame {
     private GameState gameState;
@@ -29,11 +29,10 @@ public class GameFrame extends JFrame {
 
 
 
-    public GameFrame(GameState gameState){
+    public GameFrame(){
         super();
         boardCellPanels = new HashMap<Point,BoardCellPanel>();
         boardCellButtons = new HashMap<Point,BoardCellButton>();
-        this.gameState = gameState;
         initGui();
 
     }
@@ -56,6 +55,7 @@ public class GameFrame extends JFrame {
         networkedItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 GameFrame.this.dispose();
+                new NetworkSetupFrame();
 
             }
         });
@@ -160,6 +160,7 @@ public class GameFrame extends JFrame {
 
         if (gameState.gameIsOver()) {
             if (gameState.isAWinForX()) {
+
                 messageLabel.setText("Game Over! X Won");
             }else if (gameState.isAWinForO()) {
                 messageLabel.setText("Game Over! O Won");
@@ -183,18 +184,6 @@ public class GameFrame extends JFrame {
         this.gameState = gameState;
         refreshBoard();
     }
-//    //board buttons
-//    private JButton board[][];
-//
-//    //option buttons
-//    private JButton quitButton;
-//    private JButton undoButton;
-//    private JButton saveButton;
-//    private JButton loadButton;
-//
-//    private JLabel winsX;
-//    private JLabel winsO;
-//    private JLabel teamX;
-//    private JLabel teamO;
+
 
     }

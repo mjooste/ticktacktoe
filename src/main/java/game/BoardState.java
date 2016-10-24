@@ -1,6 +1,6 @@
 package game;
 
-import javafx.scene.layout.Pane;
+
 import main.Main;
 
 import java.util.HashMap;
@@ -15,7 +15,7 @@ public class BoardState {
     private Map<Point, Cell> cells;
 
 
-
+//hold reference to remote player to send updates to it
     //new board state loop through row and col and inner row and column, add empty cells
     public BoardState() {
         cells = new HashMap<Point, Cell>();

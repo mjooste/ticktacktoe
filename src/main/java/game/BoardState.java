@@ -1,11 +1,12 @@
 package game;
 
+import javafx.scene.layout.Pane;
+import main.Main;
+
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by therina on 2016/10/01.
- */
+
 public class BoardState {
 
     public static final int MIN = 0;
@@ -13,9 +14,12 @@ public class BoardState {
 
     private Map<Point, Cell> cells;
 
+
+
     //new board state loop through row and col and inner row and column, add empty cells
     public BoardState() {
         cells = new HashMap<Point, Cell>();
+
         //cells
        for (int r = MIN; r <= MAX; r++ ){
            for (int c = MIN; c <= MAX; c++) {
@@ -49,10 +53,15 @@ public class BoardState {
        setCell(new Point(row, column, innerRow, innerColumn), cell);
    }
 
-
-
-
-
-
-
+//    public void setPanel(Point point, Panel panel){
+//        panels.put(point,panel);
+//    }
+//
+//    public void setPanel(int innerRow, int innerColumn, Panel panel) {
+//        setPanel(new Point(innerRow,innerColumn),panel);
+//    }
+//
+////    public void  getPanel(Point point){
+////    return getPanel(new Point(row, coloumn))
+////}
 }

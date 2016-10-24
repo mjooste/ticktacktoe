@@ -1,10 +1,11 @@
 package game;
 
-import javax.swing.plaf.basic.BasicOptionPaneUI;
+import gui.BoardCellPanel;
 
-/**
- * Created by therina on 2016/10/01.
- */
+import javax.swing.plaf.basic.BasicOptionPaneUI;
+import java.awt.*;
+
+
 public class GameState {
 
     private GameStyle gameStyle;
@@ -13,6 +14,7 @@ public class GameState {
     private Player playerX;
     private Player playerO;
     private Player activePlayer;
+    private BoardCellPanel activePanel;
     private Point selectedPoint;
 
     public GameState (GameStyle gameStyle){
@@ -29,6 +31,7 @@ public class GameState {
         selectedPoint = null;
     }
 
+
     public void switchPlayers() {
         if (activePlayer == playerX) {
             activePlayer = playerO;
@@ -37,21 +40,30 @@ public class GameState {
         }
     }
 
+
     public void doMove(Point point){
         if(isLegalMove(point)){
             theBoard.setCell(point, activePlayer.getCharacter());
+            // Set new active panel
+            activePanel = new BoardCellPanel(point.getInnerRow(), point.getInnerColumn());
             switchPlayers();
         }
-
     }
 
+
     public boolean isLegalMove(Point point){
-        return theBoard.getCell(point).equals(Cell.E) ;
+        boolean isEmpty = theBoard.getCell(point).equals(Cell.E);
+        boolean onActivePanel = activePanel == null || theBoard.getCell(point).equals(Cell.E) && point.getRow() == activePanel.getRow() && point.getColumn() == activePanel.getColumn();
+        return isEmpty && onActivePanel;
+
+
     }
 
     public void doMove(int row, int column, int innerRow, int innerColumn ){
         doMove(new Point(row,column,innerRow,innerColumn));
     }
+
+
     public boolean gameIsOver(){
         return isAWinForX() || isAWinForO();
     }

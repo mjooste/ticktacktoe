@@ -2,14 +2,13 @@ package gui;
 
 import javax.swing.*;
 
-/**
- * Created by therina on 2016/10/12.
- */
+
 public class BoardCellButton extends JButton {
 
     private BoardCellPanel panel;
     private int innerRow;
     private int innerColumn;
+    public JButton[] cellButton;
 
     //send through the cell to which the buttons belong to
     public BoardCellButton( BoardCellPanel panel, int innerRow, int innerColumn) {
@@ -30,8 +29,12 @@ public class BoardCellButton extends JButton {
         return innerColumn;
     }
 
-
     public int getInnerRow() {
         return innerRow;
+    }
+
+    public void enableCell() {
+        for (int i = 0; i < cellButton.length; i++)
+            cellButton[i].setEnabled(false); //Reset Board
     }
 }

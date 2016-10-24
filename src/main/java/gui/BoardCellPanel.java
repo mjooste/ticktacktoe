@@ -4,23 +4,15 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by therina on 2016/10/01.
- */
 public class BoardCellPanel extends JPanel {
 
     private int row;
     private int column;
 
-
-
     public BoardCellPanel(int row, int column) {
         super();
         this.row = row;
         this.column = column;
-
-
-
     }
 
     public int getRow() {
@@ -31,7 +23,10 @@ public class BoardCellPanel extends JPanel {
         return column;
     }
 
-
+//    public void enableAll(int row, int column) {
+//        this.getRow().enableCellButtons;
+//        this.getColumn().enableCellButtons;
+//    }
 
 
 

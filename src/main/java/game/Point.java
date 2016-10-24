@@ -2,9 +2,6 @@ package game;
 
 import java.awt.*;
 
-/**
- * Created by therina on 2016/10/01.
- */
 public class Point {
 
     private int row;
@@ -21,6 +18,12 @@ public class Point {
         this.innerRow = innerRow;
         this.innerColumn = innerColumn;
     }
+
+    public Point(int innerRow, int innerColumn){
+        this.innerColumn = innerColumn;
+        this.innerRow = innerRow;
+    }
+
 
     @Override
     public boolean equals(Object o) {

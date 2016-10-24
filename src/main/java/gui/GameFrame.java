@@ -6,6 +6,7 @@ import game.*;
 import game.Point;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,10 +15,11 @@ import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.awt.BorderLayout;
 
-/**
- * Created by therina on 2016/10/01.
- */
+import static java.awt.SystemColor.text;
+import static javafx.application.ConditionalFeature.SWT;
+
 public class GameFrame extends JFrame {
     private GameState gameState;
     private JLabel messageLabel;
@@ -70,12 +72,23 @@ public class GameFrame extends JFrame {
         for (int r = BoardState.MIN; r <= BoardState.MAX; r++) {
             for (int c = BoardState.MIN; c <= BoardState.MAX; c++) {
                 BoardCellPanel cellPanel = new BoardCellPanel(r,c);
-                cellPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                cellPanel.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+                cellPanel.setBackground(new Color(130, 184, 189));
+                cellPanel.setForeground(Color.WHITE);
+
+
 
                 for (int ir = BoardState.MIN; ir <= BoardState.MAX; ir++) {
                     for (int ic = BoardState.MIN; ic <= BoardState.MAX; ic++) {
                         BoardCellButton cellButton = new BoardCellButton(cellPanel, ir,ic);
                         cellButton.setPreferredSize(new Dimension(40, 40));
+                        cellButton.setBorder(BorderFactory.createLineBorder(Color.WHITE));
+
+
+                        // style cell buttons
+                        cellButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                        cellButton.setMargin(new Insets(0,0,0,0));
+
 
                         cellButton.addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent actionEvent) {
@@ -86,6 +99,7 @@ public class GameFrame extends JFrame {
                         });
                         boardCellButtons.put(new Point(r,c,ir,ic),cellButton);
                         cellPanel.add(cellButton);
+                        boardCellButtons.getClass();
 
                         }
                     }
@@ -123,9 +137,14 @@ public class GameFrame extends JFrame {
                         }
                     }
                 }
-//
             }
         }
+
+        //styles message label
+        messageLabel.setForeground(new Color(74, 74, 74));
+        messageLabel.setBackground(Color.WHITE);
+        messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        messageLabel.setVerticalAlignment(SwingConstants.CENTER);
 
 
         if (gameState.gameIsOver()) {

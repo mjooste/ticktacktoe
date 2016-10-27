@@ -72,6 +72,7 @@ public class CommunicationLink extends Thread {
                 if(sendingMode){
                     //check if we have a move to send
                     if (moveToSend == null){
+                        System.out.println("sleeping");
                         sleep(1000L);
                     }else {
                         //convert point to a string
@@ -87,9 +88,8 @@ public class CommunicationLink extends Thread {
                     String pointString = in.readUTF();
                     //convert point string into a new point
                     System.out.println("Read " + pointString);
-                    Point point = new Point(pointString);
-                    String[] points = pointString.split(" ");
-                    Point movePoint = new Point(points[1]);
+//                    Point point = new Point(pointString);
+                    Point movePoint = new Point(pointString);
                     receiveMove(movePoint);
                     sendingMode = true;
                 }

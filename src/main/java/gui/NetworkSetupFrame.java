@@ -15,7 +15,7 @@ import java.io.IOException;
  * Created by therina on 2016/10/24.
  */
 public class NetworkSetupFrame extends JFrame {
-    public static final int PORTNUM = 99331;
+    public static final int PORTNUM = 9933;
 
     private JComboBox comboBox;
     private JLabel outputLabel;

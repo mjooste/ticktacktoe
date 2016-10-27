@@ -114,7 +114,7 @@ public class GameFrame extends JFrame {
                         cellPanel.add(cellButton);
                         boardCellButtons.getClass();
 
-
+                        //refreshBoard();
                         }
                     }
                 boardCellPanels.put(new Point(r,c), cellPanel);
@@ -155,12 +155,15 @@ public class GameFrame extends JFrame {
             }
         }
         //if activePanel != 0
-        Point activePanelPoint = new Point(gameState.getActivePanel().getRow(), gameState.getActivePanel().getColumn());
 
         for (Point point: boardCellPanels.keySet()) {
             boardCellPanels.get(point).setBackground(new Color(130, 184, 189));
         }
-        boardCellPanels.get(activePanelPoint).setBackground(new Color(149, 189, 174));
+
+        if (gameState.getActivePanel() != null) {
+            Point activePanelPoint = new Point(gameState.getActivePanel().getRow(), gameState.getActivePanel().getColumn());
+            boardCellPanels.get(activePanelPoint).setBackground(new Color(149, 189, 174));
+        }
 
         //styles message label
         messageLabel.setForeground(new Color(74, 74, 74));

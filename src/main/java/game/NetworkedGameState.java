@@ -12,31 +12,31 @@ public class NetworkedGameState extends GameState {
 
 
     //set what type of game it is
-    public NetworkedGameState(GameStyle gameStyle, Cell localCharacter){
+    public NetworkedGameState(GameStyle gameStyle, Cell localCharacter) {
         super(gameStyle);
 
         //which character is the local player
         //the board should only be active when the active player's character is equal to the local player's character
-        if (localCharacter.equals(Cell.X)){
-            localPlayer = playerX ;
-        }else {
+        if (localCharacter.equals(Cell.X)) {
+            localPlayer = playerX;
+        } else {
             localPlayer = playerO;
         }
     }
 
     //link
-    public void setCommunicationLink(CommunicationLink communicationLink){
+    public void setCommunicationLink(CommunicationLink communicationLink) {
         this.communicationLink = communicationLink;
     }
 
-    public void setGameFrame(GameFrame gameFrame){
+    public void setGameFrame(GameFrame gameFrame) {
         this.gameFrame = gameFrame;
     }
 
     @Override
     public void doMove(Point point) {
-       //player can only move something on the board if it is their turn
-        if (getActivePlayer().getCharacter().equals(localPlayer.getCharacter())){
+        //player can only move something on the board if it is their turn
+        if (getActivePlayer().getCharacter().equals(localPlayer.getCharacter())) {
             //do the move
             super.doMove(point);
 
@@ -47,6 +47,16 @@ public class NetworkedGameState extends GameState {
 
 
         }
+    }
+
+    public void doCommunicationMove(Point point) {
+        super.doMove(point);
+        gameFrame.refreshBoard();
+    }
+
+    public boolean isLocalPlayerTurn() {
+        return localPlayer.equals(getActivePlayer());
+
     }
 }
 

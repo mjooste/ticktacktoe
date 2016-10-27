@@ -60,7 +60,7 @@ public class GameState {
     public boolean isLegalMove(Point point) {
         boolean isEmpty = theBoard.getCell(point).equals(Cell.E);
         boolean onActivePanel = activePanel == null || theBoard.getCell(point).equals(Cell.E) && point.getRow() == activePanel.getRow() && point.getColumn() == activePanel.getColumn();
-        return isEmpty && onActivePanel;
+        return isEmpty && onActivePanel && !gameIsOver();
 
 
     }
@@ -71,17 +71,17 @@ public class GameState {
 
 
     public boolean gameIsOver(){
-        return isAWinForX() || isAWinForO();
+        return isAWinForX(theBoard) || isAWinForO(theBoard);
     }
 
-    public boolean isAWinForX(){
+    public boolean isAWinForX(BoardState board){
 
         //look for all in a row
         for (int r = BoardState.MIN; r <= BoardState.MAX; r++ ) {
             for (int c = BoardState.MIN; c <= BoardState.MAX; c++) {
                 for (int ir = BoardState.MIN; ir <= BoardState.MAX; ir++ ) {
                     for (int ic = BoardState.MIN; ic <= BoardState.MAX; ic++) {
-                        if (theBoard.getCell(r,c,ir,ic) != Cell.X){
+                        if (board.getCell(r,c,ir,ic) != Cell.X){
                             break;
                         }
                         if ( ic >= 2){
@@ -97,7 +97,7 @@ public class GameState {
             for (int c = BoardState.MIN; c <= BoardState.MAX; c++) {
                 for (int ic = BoardState.MIN; ic <= BoardState.MAX; ic++) {
                     for (int ir = BoardState.MIN; ir <= BoardState.MAX; ir++ ) {
-                        if (theBoard.getCell(r,c,ir,ic) != Cell.X){
+                        if (board.getCell(r,c,ir,ic) != Cell.X){
                             break;
                         }
                         if ( ir >= 2){
@@ -111,7 +111,7 @@ public class GameState {
         //look for all the diagonals
         for (int r = BoardState.MIN; r <= BoardState.MAX; r++ ) {
             for (int c = BoardState.MIN; c <= BoardState.MAX; c++) {
-                if (theBoard.getCell(r,c,0,0).equals(Cell.X) && theBoard.getCell(r,c,1,1).equals(Cell.X) && theBoard.getCell(r,c,2,2).equals(Cell.X) )
+                if (board.getCell(r,c,0,0).equals(Cell.X) && board.getCell(r,c,1,1).equals(Cell.X) && board.getCell(r,c,2,2).equals(Cell.X) )
                 {
                     return true;
                 }
@@ -120,7 +120,7 @@ public class GameState {
 
         for (int r = BoardState.MIN; r <= BoardState.MAX; r++ ) {
             for (int c = BoardState.MIN; c <= BoardState.MAX; c++) {
-                if (theBoard.getCell(r,c,0,2).equals(Cell.X) && theBoard.getCell(r,c,1,1).equals(Cell.X) && theBoard.getCell(r,c,2,0).equals(Cell.X) )
+                if (board.getCell(r,c,0,2).equals(Cell.X) && board.getCell(r,c,1,1).equals(Cell.X) && board.getCell(r,c,2,0).equals(Cell.X) )
                 {
                     return true;
                 }
@@ -129,14 +129,14 @@ public class GameState {
         return false;
     }
 
-    public boolean isAWinForO(){
+    public boolean isAWinForO(BoardState board){
 
         //look for all in a row
         for (int r = BoardState.MIN; r <= BoardState.MAX; r++ ) {
             for (int c = BoardState.MIN; c <= BoardState.MAX; c++) {
                 for (int ir = BoardState.MIN; ir <= BoardState.MAX; ir++ ) {
                     for (int ic = BoardState.MIN; ic <= BoardState.MAX; ic++) {
-                        if (theBoard.getCell(r,c,ir,ic) != Cell.O){
+                        if (board.getCell(r,c,ir,ic) != Cell.O){
                             break;
                         }
                         if ( ic >= 2){
@@ -152,7 +152,7 @@ public class GameState {
             for (int c = BoardState.MIN; c <= BoardState.MAX; c++) {
                 for (int ic = BoardState.MIN; ic <= BoardState.MAX; ic++) {
                     for (int ir = BoardState.MIN; ir <= BoardState.MAX; ir++ ) {
-                        if (theBoard.getCell(r,c,ir,ic) != Cell.O){
+                        if (board.getCell(r,c,ir,ic) != Cell.O){
                             break;
                         }
                         if ( ir >= 2){
@@ -166,7 +166,7 @@ public class GameState {
         //look for all the diagonals
         for (int r = BoardState.MIN; r <= BoardState.MAX; r++ ) {
             for (int c = BoardState.MIN; c <= BoardState.MAX; c++) {
-                if (theBoard.getCell(r,c,0,0).equals(Cell.O) && theBoard.getCell(r,c,1,1).equals(Cell.O) && theBoard.getCell(r,c,2,2).equals(Cell.O))
+                if (board.getCell(r,c,0,0).equals(Cell.O) && board.getCell(r,c,1,1).equals(Cell.O) && board.getCell(r,c,2,2).equals(Cell.O))
                 {
                     return true;
                 }
@@ -175,7 +175,7 @@ public class GameState {
 
         for (int r = BoardState.MIN; r <= BoardState.MAX; r++ ) {
             for (int c = BoardState.MIN; c <= BoardState.MAX; c++) {
-                if (theBoard.getCell(r,c,0,2).equals(Cell.O) && theBoard.getCell(r,c,1,1).equals(Cell.O) && theBoard.getCell(r,c,2,0).equals(Cell.O) )
+                if (board.getCell(r,c,0,2).equals(Cell.O) && board.getCell(r,c,1,1).equals(Cell.O) && board.getCell(r,c,2,0).equals(Cell.O) )
                 {
                     return true;
                 }

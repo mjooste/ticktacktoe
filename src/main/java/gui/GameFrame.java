@@ -60,6 +60,14 @@ public class GameFrame extends JFrame {
             }
         });
         JMenuItem aiItem = new JMenuItem("New AI Game");
+        aiItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+                AiGameState aiGameState = new AiGameState(GameStyle.AI,Cell.X);
+                aiGameState.setGameFrame(GameFrame.this);
+                gameState = aiGameState;
+                refreshBoard();
+            }
+        });
 
         JMenuItem instructions = new JMenuItem("Instructions");
 
@@ -125,6 +133,7 @@ public class GameFrame extends JFrame {
 
     }
 
+
     public void refreshBoard(){
         for (int r = BoardState.MIN; r <= BoardState.MAX; r++) {
             for (int c = BoardState.MIN; c <= BoardState.MAX; c++) {
@@ -145,7 +154,9 @@ public class GameFrame extends JFrame {
                 }
             }
         }
+        //if activePanel != 0
         Point activePanelPoint = new Point(gameState.getActivePanel().getRow(), gameState.getActivePanel().getColumn());
+
         for (Point point: boardCellPanels.keySet()) {
             boardCellPanels.get(point).setBackground(new Color(130, 184, 189));
         }
@@ -159,10 +170,10 @@ public class GameFrame extends JFrame {
 
 
         if (gameState.gameIsOver()) {
-            if (gameState.isAWinForX()) {
+            if (gameState.isAWinForX(gameState.getTheBoard())) {
 
                 messageLabel.setText("Game Over! X Won");
-            }else if (gameState.isAWinForO()) {
+            }else if (gameState.isAWinForO(gameState.getTheBoard())) {
                 messageLabel.setText("Game Over! O Won");
 
             } else {

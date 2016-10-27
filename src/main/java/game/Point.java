@@ -24,6 +24,14 @@ public class Point {
         this.innerRow = innerRow;
     }
 
+    public Point(String pointString){
+        String[] values = pointString.split(";");
+        this.row = Integer.parseInt(values[0]);
+        this.column = Integer.parseInt(values[1]);
+        this.innerRow = Integer.parseInt(values[2]);
+        this.innerColumn = Integer.parseInt(values[3]);
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -65,5 +73,10 @@ public class Point {
 
     public int getInnerColumn() {
         return innerColumn;
+    }
+
+    @Override
+    public String toString() {
+        return row + ";" + column + ";" + innerRow + ";" + innerColumn ;
     }
 }

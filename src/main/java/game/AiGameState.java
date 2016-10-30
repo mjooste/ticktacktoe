@@ -4,13 +4,12 @@ import gui.GameFrame;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import static game.BoardState.MAX;
 import static game.BoardState.MIN;
 
-/**
- * Created by therina on 2016/10/25.
- */
+
 public class AiGameState extends GameState {
     private GameFrame gameFrame;
     private Player localPlayer;
@@ -50,11 +49,20 @@ public class AiGameState extends GameState {
             super.doMove(point);
 
             if (getActivePlayer().getCharacter().equals(aiPlayer.getCharacter())){
-               MoveAndScore bestMove = runMinimax(getTheBoard(), point, aiPlayer,5);
+               MoveAndScore bestMove = runMinimax(getTheBoard(), point, aiPlayer,4);
                 if (bestMove != null){
                     this.minimaxMove = bestMove.getMove();
+                    doAiMove(minimaxMove);
+                    // we can take this out
+                    try {
+                        Thread.sleep(1000L);
+                    }catch (InterruptedException e) {
+                        Thread.interrupted();
+                    }
+                    //old
+                    doAiMove(minimaxMove);
                 }
-                doAiMove(minimaxMove);
+
             }
         }
     }
@@ -68,9 +76,15 @@ public class AiGameState extends GameState {
         for (int r = MIN; r <= MAX; r++ ){
             for (int c = MIN; c <= MAX; c++) {
                 if(r == getActivePanel().getRow() && c == getActivePanel().getColumn()){
+                   // av_point_count == 0;
                     for (int ir = MIN; ir <= MAX; ir++) {
                         for (int ic = MIN; ic <= MAX; ic++) {
                             if (getTheBoard().getCell(r,c,ir,ic) == Cell.E) {
+                                Random randomGenerator = new Random();
+                                for (int idx = 1; idx <= 2; ++idx){
+                                    int randomInt = randomGenerator.nextInt(9);
+                                }
+                                //av_point_count == av_point_count + 1;
                                 availablePoints.add(new Point(r,c,ir,ic));
                             }
 

@@ -1,6 +1,6 @@
 package gui;
 
-import game.GameState;
+import game.*;
 
 import java.awt.*;
 import javax.swing.*;
@@ -16,10 +16,79 @@ import java.awt.event.ActionListener;
 
 public class InstructionsFrame extends JFrame{
 
+    private GameState gameState;
     private JLabel text;
     private JButton backButton;
 
     public InstructionsFrame() {
+
+
+        //Menu
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu = new JMenu("Back");
+
+
+//        backButton = new JButton("Back to Menu");
+//        backButton.addActionListener(new ActionListener() {
+//            public void actionPerformed()
+//        }
+//
+
+
+//        JMenuBar.add(backButton);
+//
+//        backButton.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent actionEvent) {
+//                try{
+//                    InstructionsFrame.this.dispose();
+//                    GameFrame gameFrame = new GameFrame();
+//                    gameFrame.setGameState(gameState);
+//                    //gameState.setGameFrame(gameFrame);
+//                }
+//                catch (IOException ex){
+//                    ex.printStackTrace();
+//                }
+//            }
+//        });
+
+//        InstructionsFrame.this.dispose();
+//        GameFrame gameFrame = new GameFrame();
+//        gameFrame.setGameState(gameState);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//        gameState.setGameFrame(gameFrame);
+
+
+        //JButton backButton = new JButton("hello");
+
+//        backButton.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//                InstructionsFrame.this.dispose();
+//                new GameState(GameStyle.TWO_PLAYER);
+//            }
+//        });
+
+        menuBar.add(menu);
+        this.setJMenuBar(menuBar);
+
+
+
+
+
         setTitle("Instructions");
         setSize(500, 600);
         setLocationRelativeTo(null);
@@ -45,7 +114,6 @@ public class InstructionsFrame extends JFrame{
         background.add(text);
         background.add(backButton);
 
-//        backButton.addActionListener(new InstructionsFrame());
     }
 
 }

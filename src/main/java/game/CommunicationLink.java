@@ -1,16 +1,12 @@
 package game;
 
-import sun.security.ntlm.Server;
+//import sun.security.ntlm.Server;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-
-/**
- * Created by therina on 2016/10/24.
- */
 
 //sends messages to the other player, to say a move is made. Please update the board
 public class CommunicationLink extends Thread {

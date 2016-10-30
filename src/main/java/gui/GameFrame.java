@@ -70,6 +70,14 @@ public class GameFrame extends JFrame {
         });
 
         JMenuItem instructions = new JMenuItem("Instructions");
+        instructions.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                GameFrame.this.dispose();
+                new InstructionsFrame();
+            }
+        });
+
+
 
         menu.add(twoPlayerItem);
         menu.add(networkedItem);

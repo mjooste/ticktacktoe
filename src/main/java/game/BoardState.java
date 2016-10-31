@@ -92,4 +92,6 @@ public class BoardState {
         //creates an equal but different board
         return new BoardState(cells);
     }
+
+
 }

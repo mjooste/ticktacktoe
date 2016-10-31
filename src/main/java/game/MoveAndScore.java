@@ -1,8 +1,6 @@
 package game;
 
-/**
- * Created by therina on 2016/10/25.
- */
+
 public class MoveAndScore {
     private Point move;
     private int score;

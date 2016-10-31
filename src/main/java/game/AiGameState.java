@@ -15,7 +15,6 @@ public class AiGameState extends GameState {
     private Player localPlayer;
     private Player aiPlayer;
     private Point minimaxMove;
-    private int heuristic;
 
     List<Point> availablePoints;
 
